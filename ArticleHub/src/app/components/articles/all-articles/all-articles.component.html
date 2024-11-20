@@ -1,0 +1,29 @@
+
+<div class="article-search">
+    <input [(ngModel)]="searchKeyword" placeholder="Search articles" />
+    <button (click)="onSearch()">Search</button>
+  </div>
+  
+  <div class="article-sort">
+    <label for="sort">Sort by:</label>
+    <select id="sort" [(ngModel)]="sortBy" (change)="onSortChange(sortBy)">
+      <option value="latest">Latest</option>
+      <option value="popular">Most Popular</option>
+    </select>
+  </div>
+  
+  <div class="article-list">
+    <div *ngFor="let article of filteredArticles" class="article-item">
+      <img [src]="article.thumbnail" alt="Article thumbnail" />
+      <h3>{{ article.title }}</h3>
+      <p>{{ article.description }}</p>
+      <small>by {{ article.author }} - {{ article.publishDate | date }}</small>
+    </div>
+  </div>
+  
+  <div class="pagination-controls">
+    <button (click)="onPageChange(page - 1)" [disabled]="page === 1">Previous</button>
+    <span>Page {{ page }}</span>
+    <button (click)="onPageChange(page + 1)" [disabled]="page * pageSize >= articles.length">Next</button>
+  </div>
+  

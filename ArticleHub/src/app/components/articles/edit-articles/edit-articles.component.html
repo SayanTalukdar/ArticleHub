@@ -1,0 +1,28 @@
+<div class="create-article-container">
+    <h1>Edit Article</h1>
+  
+    <form [formGroup]="editForm" (ngSubmit)="onSubmit()">
+      <label>
+        Title
+        <input type="text" formControlName="title" placeholder="Enter article title" />
+        <small *ngIf="editForm.get('title')?.invalid && editForm.get('title')?.touched">
+          Title is required (min 5 characters).
+        </small>
+      </label>
+  
+      <label>
+        Content
+        <quill-editor formControlName="content"  [styles]="{ minHeight: '300px' }"></quill-editor>
+      </label>
+  
+      <label>
+        Tags (comma-separated)
+        <input type="text" formControlName="tags" placeholder="Enter tags" />
+      </label>
+  
+      <div class="action-buttons">
+        <button type="submit" [disabled]="isSubmitting">Save</button>
+      </div>
+    </form>
+  </div>
+  
